@@ -68,7 +68,7 @@ public class GetMethod extends HttpGet {
      * @throws ParserException where calendar parsing fails
      */
     public Calendar getCalendar(HttpResponse httpResponse) throws IOException, ParserException {
-        String contentType = getFirstHeader("Content-Type").getValue();
+        String contentType = httpResponse.getFirstHeader("Content-Type").getValue();
         if (contentType.startsWith("text/calendar")) {
             CalendarBuilder builder = new CalendarBuilder();
             return builder.build(httpResponse.getEntity().getContent());
