@@ -97,8 +97,7 @@ public class PropFindResponseHandler implements ResponseHandler {
                         DavProperty<?> property = iNames.nextProperty();
                         if (property != null) {
                             _properties.add(property);
-                            ResourceType resourceType = getResourceType(property);
-                            if (resourceType != null && types.contains(resourceType)) {
+                            if (containsResourceType(property, types)) {
                                 isCollection = true;
                             }
                         }
@@ -113,7 +112,7 @@ public class PropFindResponseHandler implements ResponseHandler {
         return collections;
     }
 
-    private ResourceType getResourceType(DavProperty property) {
+    private boolean containsResourceType(DavProperty property, List<ResourceType> types) {
         if ((DavConstants.PROPERTY_RESOURCETYPE.equals(property.getName().getName())) && (DavConstants.NAMESPACE.equals(property.getName().getNamespace()))) {
             Object value = property.getValue();
             if (value instanceof ArrayList) {
@@ -121,13 +120,15 @@ public class PropFindResponseHandler implements ResponseHandler {
                     if (child instanceof Element) {
                         String nameNode = child.getLocalName();
                         if (nameNode != null) {
-                            return ResourceType.findByDescription(nameNode);
+                            if(types.contains(ResourceType.findByDescription(nameNode))) {
+                                return true;
+                            }
                         }
                     }
                 }
             }
         }
-        return null;
+        return false;
     }
 
     public String getDavPropertyUri(DavPropertyName type) throws DavException {
