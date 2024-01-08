@@ -40,79 +40,96 @@ package net.fortuna.ical4j.connector.dav;
  * 
  *         $Id$
  */
-public enum PathResolver {
-
-    /**
-	 *
-	 */
-    CHANDLER( "/dav/%s/", "/dav/users/%s"),
-
-    RADICALE("/%s", "/%s/"),
-
-    BAIKAL("/calendars/%s", "/calendars/%s/"),
-
-    /**
-	 * 
-	 */
-    CGP("/CalDAV/", "/CalDAV/"),
-
-    /**
-	 * 
-	 */
-    KMS("/caldav/", null),
-
-    /**
-	 * 
-	 */
-    ZIMBRA("/principals/users/%s/", "/dav/%s/"),
-
-    /**
-	 * 
-	 */
-    ICAL_SERVER("/principals/users/%s/", "/dav/%s/"),
-
-    /**
-	 * 
-	 */
-    CALENDAR_SERVER("/dav/%s/", "/dav/%s/"),
-    
-    GCAL("/calendar/dav/%s/user/", "/calendar/dav/%s/events/"),
-
-    SOGO("/SOGo/dav/%s/", "/SOGo/dav/%s/"),
-    
-    DAVICAL("/caldav.php/%s/", "/caldav.php/%s/"),
-    
-    BEDEWORK("/ucaldav/principals/users/%s/", "/ucaldav/users/%s/"),
-
-    ORACLE_CS("/dav/principals/%s/", "/dav/home/%s/"),
-    
-    GENERIC("%s", "%s");
-
-
-    private final String userPathBase;
-
-    private final String principalPathBase;
-
-    PathResolver(String principalPathBase, String userPathBase) {
-        this.principalPathBase = principalPathBase;
-        this.userPathBase = userPathBase;
-    }
-
+public interface PathResolver {
     /**
      * Resolves the path component for a user's calendar store URL.
      * @param username a username
      * @return the user path for a server implementation
      */
-    public String getUserPath(String username) {
-        return String.format(userPathBase, username);
-    }
+    String getUserPath(String username);
 
     /**
      * Resolves the path component for a principal URL.
      * @param username a username
      * @return the principal path for a server implementation
      */
-    public String getPrincipalPath(String username) {
-        return String.format(principalPathBase, username);
+    String getPrincipalPath(String username);
+
+    enum Defaults implements PathResolver {
+        /**
+         *
+         */
+        CHANDLER("/dav/%s/", "/dav/users/%s"),
+
+        RADICALE("/%s", "/%s/"),
+
+        BAIKAL("/calendars/%s", "/calendars/%s/"),
+
+        /**
+         *
+         */
+        CGP("/CalDAV/", "/CalDAV/"),
+
+        /**
+         *
+         */
+        KMS("/caldav/", null),
+
+        /**
+         *
+         */
+        ZIMBRA("/principals/users/%s/", "/dav/%s/"),
+
+        /**
+         *
+         */
+        ICAL_SERVER("/principals/users/%s/", "/dav/%s/"),
+
+        /**
+         *
+         */
+        CALENDAR_SERVER("/dav/%s/", "/dav/%s/"),
+
+        GCAL("/calendar/dav/%s/user/", "/calendar/dav/%s/events/"),
+
+        SOGO("/SOGo/dav/%s/", "/SOGo/dav/%s/"),
+
+        DAVICAL("/caldav.php/%s/", "/caldav.php/%s/"),
+
+        BEDEWORK("/ucaldav/principals/users/%s/", "/ucaldav/users/%s/"),
+
+        ORACLE_CS("/dav/principals/%s/", "/dav/home/%s/"),
+
+        GENERIC("%s", "%s");
+
+
+        private final String userPathBase;
+
+        private final String principalPathBase;
+
+        Defaults(String principalPathBase, String userPathBase) {
+            this.principalPathBase = principalPathBase;
+            this.userPathBase = userPathBase;
+        }
+
+        /**
+         * Resolves the path component for a user's calendar store URL.
+         *
+         * @param username a username
+         * @return the user path for a server implementation
+         */
+        public String getUserPath(String username) {
+            return String.format(userPathBase, username);
+        }
+
+        /**
+         * Resolves the path component for a principal URL.
+         *
+         * @param username a username
+         * @return the principal path for a server implementation
+         */
+        public String getPrincipalPath(String username) {
+            return String.format(principalPathBase, username);
+        }
     }
 }

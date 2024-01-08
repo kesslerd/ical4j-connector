@@ -58,13 +58,13 @@ public class CalDavCalendarCollectionIntegrationTest extends TestSuite {
         char[] password = "connector".toCharArray();
 
         suite.addTest(new CalendarCollectionTest<CalDavCalendarCollection>("testGetDescription",
-                new CalDavCalendarStoreLifecycle(url, PathResolver.CHANDLER), username, password));
+                new CalDavCalendarStoreLifecycle(url, PathResolver.Defaults.Defaults.CHANDLER), username, password));
         
         suite.addTest(new CalendarCollectionTest<CalDavCalendarCollection>("testGetDisplayName",
-                new CalDavCalendarStoreLifecycle(url, PathResolver.CHANDLER), username, password));
+                new CalDavCalendarStoreLifecycle(url, PathResolver.Defaults.Defaults.CHANDLER), username, password));
         
         suite.addTest(new CalendarCollectionTest<CalDavCalendarCollection>("testGetCalendar",
-                new CalDavCalendarStoreLifecycle(url, PathResolver.CHANDLER), username, password));
+                new CalDavCalendarStoreLifecycle(url, PathResolver.Defaults.CHANDLER), username, password));
         
 //        suite.addTest(new CalendarCollectionTest("testGetMaxAttendeesPerInstance",
 //                new CalDavCalendarStoreLifecycle(url, path), username, password));
@@ -76,16 +76,16 @@ public class CalDavCalendarCollectionIntegrationTest extends TestSuite {
 //                new CalDavCalendarStoreLifecycle(url, path), username, password));
         
         suite.addTest(new CalendarCollectionTest<CalDavCalendarCollection>("testGetMaxResourceSize",
-                new CalDavCalendarStoreLifecycle(url, PathResolver.CHANDLER), username, password));
+                new CalDavCalendarStoreLifecycle(url, PathResolver.Defaults.CHANDLER), username, password));
         
 //        suite.addTest(new CalendarCollectionTest("testGetMinDateTime",
 //                new CalDavCalendarStoreLifecycle(url, path), username, password));
         
         suite.addTest(new CalendarCollectionTest<CalDavCalendarCollection>("testGetSupportedComponentTypes",
-                new CalDavCalendarStoreLifecycle(url, PathResolver.CHANDLER), username, password));
+                new CalDavCalendarStoreLifecycle(url, PathResolver.Defaults.CHANDLER), username, password));
         
         suite.addTest(new CalendarCollectionTest<CalDavCalendarCollection>("testGetCalendars",
-                new CalDavCalendarStoreLifecycle(url, PathResolver.CHANDLER), username, password));
+                new CalDavCalendarStoreLifecycle(url, PathResolver.Defaults.CHANDLER), username, password));
 
         return suite;
     }

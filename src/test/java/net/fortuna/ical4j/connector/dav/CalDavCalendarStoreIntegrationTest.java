@@ -58,11 +58,11 @@ public class CalDavCalendarStoreIntegrationTest extends TestSuite {
         char[] password = "connector".toCharArray();
         
         suite.addTest(new ObjectStoreTest<CalDavCalendarCollection>("testAddCollection",
-                new CalDavCalendarStoreLifecycle(url, PathResolver.CHANDLER), username, password));
+                new CalDavCalendarStoreLifecycle(url, PathResolver.Defaults.CHANDLER), username, password));
         suite.addTest(new ObjectStoreTest<CalDavCalendarCollection>("testGetCollection",
-                new CalDavCalendarStoreLifecycle(url, PathResolver.CHANDLER), username, password));
+                new CalDavCalendarStoreLifecycle(url, PathResolver.Defaults.CHANDLER), username, password));
         suite.addTest(new ObjectStoreTest<CalDavCalendarCollection>("testRemoveCollection",
-                new CalDavCalendarStoreLifecycle(url, PathResolver.CHANDLER), username, password));
+                new CalDavCalendarStoreLifecycle(url, PathResolver.Defaults.CHANDLER), username, password));
         return suite;
     }
 
